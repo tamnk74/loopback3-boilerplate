@@ -1,0 +1,13 @@
+version: '2'
+services:
+  mongodb:
+    image: mongo
+    hostname: mongo
+    ports:
+      - 27017:27017
+    restart: always
+  redis:
+    image: redis:alpine
+    ports:
+      - 6379:6379
+      restart: always

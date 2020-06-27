@@ -1,0 +1,30 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "../api/models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/api/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "Category": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "Type": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "Account": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "Post": {
+    "dataSource": "mongoDs",
+    "public": true
+  }
+}
