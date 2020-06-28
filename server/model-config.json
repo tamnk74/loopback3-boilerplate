@@ -11,15 +11,38 @@
       "./mixins"
     ]
   },
+  "user": {
+    "dataSource": "mongoDs",
+    "public": true
+  },
+  "AccessToken": {
+    "dataSource": "mongoDs",
+    "public": false,
+    "relations": {
+      "user": {
+        "type": "belongsTo",
+        "model": "user",
+        "foreignKey": "userId"
+      }
+    }
+  },
+  "RoleMapping": {
+    "dataSource": "mongoDs",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "mongoDs",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "mongoDs",
+    "public": false
+  },
   "Category": {
     "dataSource": "mongoDs",
-    "public": true
+    "public": false
   },
   "Type": {
-    "dataSource": "mongoDs",
-    "public": true
-  },
-  "Account": {
     "dataSource": "mongoDs",
     "public": true
   },
