@@ -7,22 +7,31 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "start": "nodemon .",
-    "dev": "nodemon .",
+    "start": "nodemon --exec babel-node index.js",
+    "dev": "nodemon --exec babel-node index.js",
     "posttest": "npm run lint"
   },
   "dependencies": {
+    "@babel/cli": "^7.10.3",
+    "@babel/node": "^7.10.3",
+    "@babel/plugin-proposal-export-default-from": "^7.10.1",
+    "@babel/preset-react": "^7.10.1",
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
+    "dotenv": "^8.2.0",
     "helmet": "^3.10.0",
+    "jsonwebtoken": "^8.5.1",
     "loopback": "^3.22.0",
     "loopback-boot": "^2.6.5",
     "loopback-component-explorer": "^6.2.0",
     "loopback-connector-mongodb": "^4.2.0",
+    "loopback-context": "^3.5.1",
     "nodemon": "^2.0.4",
     "serve-favicon": "^2.0.1",
-    "strong-error-handler": "^3.0.0"
+    "strong-error-handler": "^3.0.0",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",

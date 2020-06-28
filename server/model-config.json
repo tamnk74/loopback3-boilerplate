@@ -11,15 +11,30 @@
       "./mixins"
     ]
   },
+  "AccessToken": {
+    "dataSource": "mongoDs",
+    "public": false,
+    "relations": {
+      "user": {
+        "type": "belongsTo",
+        "model": "user",
+        "foreignKey": "userId"
+      }
+    }
+  },
+  "ACL": {
+    "dataSource": "mongoDs",
+    "public": false
+  },
   "Category": {
     "dataSource": "mongoDs",
-    "public": true
+    "public": false
   },
   "Type": {
     "dataSource": "mongoDs",
     "public": true
   },
-  "Account": {
+  "user": {
     "dataSource": "mongoDs",
     "public": true
   },
