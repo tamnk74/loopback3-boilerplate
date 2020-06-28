@@ -42,7 +42,7 @@
     "@babel/plugin-transform-runtime": "^7.10.3",
     "@babel/preset-env": "^7.10.3",
     "@babel/register": "^7.10.3",
-    "eslint": "^3.17.1",
+    "eslint": "^7.3.1",
     "eslint-config-loopback": "^8.0.0"
   },
   "repository": {
