@@ -7,8 +7,11 @@
 
 const loopback = require('loopback');
 const boot = require('loopback-boot');
+const bodyParser = require('body-parser');
 
 const app = loopback();
+
+app.middleware('initial', bodyParser.urlencoded({ extended: true }));
 
 app.start = function () {
   // start the web server
