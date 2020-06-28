@@ -36,5 +36,11 @@
       "property": "Login"
     }
   ],
-  "methods": {}
+  "methods": {},
+  "remoting": {
+    "normalizeHttpPath": true
+  },
+  "http": {
+    "path": "/"
+  }
 }

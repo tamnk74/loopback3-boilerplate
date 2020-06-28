@@ -32,7 +32,7 @@
   },
   "session": {},
   "auth": {
-    "loopback#token": {}
+    "./middlewares/auth": {}
   },
   "parse": {},
   "routes": {
@@ -47,6 +47,7 @@
     "loopback#urlNotFound": {}
   },
   "final:after": {
+    "./middlewares/handleError": {},
     "strong-error-handler": {}
   }
 }
