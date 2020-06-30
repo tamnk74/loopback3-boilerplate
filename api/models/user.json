@@ -6,6 +6,12 @@
   "options": {
     "validateUpsert": true
   },
+  "remoting": {
+    "normalizeHttpPath": true
+  },
+  "http": {
+    "path": "/"
+  },
   "properties": {
     "username": {
       "type": "string",
@@ -21,7 +27,8 @@
   },
   "validations": [],
   "relations": {},
-  "acls": [{
+  "acls": [
+    {
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$unauthenticated",
@@ -36,11 +43,5 @@
       "property": "Login"
     }
   ],
-  "methods": {},
-  "remoting": {
-    "normalizeHttpPath": true
-  },
-  "http": {
-    "path": "/"
-  }
+  "methods": {}
 }

@@ -8,11 +8,28 @@
 const loopback = require('loopback');
 const boot = require('loopback-boot');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+// const loopbackPassport = require('loopback-component-passport');
 
+const { jwtStrategy } = require('../configs/passport');
 const app = loopback();
+// const PassportConfigurator = loopbackPassport.PassportConfigurator;
+// const passportConfigurator = new PassportConfigurator(app);
 
 app.middleware('initial', bodyParser.urlencoded({ extended: true }));
 
+// passportConfigurator.init();
+// passportConfigurator.setupModels({
+//   userModel: app.models.user,
+//   userIdentityModel: app.models.userIdentity,
+//   userCredentialModel: app.models.userCredential,
+// });
+
+// Jsonwebtoken authentification
+app.use(passport.initialize());
+passport.use('jwt', jwtStrategy);
+
+// app.middleware('auth', loopback.token());
 app.start = function () {
   // start the web server
   return app.listen(function () {

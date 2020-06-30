@@ -2,6 +2,6 @@
 
 module.exports = function enableAuthentication(server) {
   // enable authentication
-  console.log('auth');
+  // console.log('auth');
   server.enableAuth(); // { datasource: 'mongoDs' }
 };

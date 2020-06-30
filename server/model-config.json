@@ -15,16 +15,9 @@
     "dataSource": "mongoDs",
     "public": true
   },
-  "AccessToken": {
+  "accessToken": {
     "dataSource": "mongoDs",
-    "public": false,
-    "relations": {
-      "user": {
-        "type": "belongsTo",
-        "model": "user",
-        "foreignKey": "userId"
-      }
-    }
+    "public": false
   },
   "RoleMapping": {
     "dataSource": "mongoDs",

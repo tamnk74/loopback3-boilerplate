@@ -26,9 +26,12 @@
     "loopback": "^3.22.0",
     "loopback-boot": "^2.6.5",
     "loopback-component-explorer": "^6.2.0",
+    "loopback-component-passport": "^3.12.0",
     "loopback-connector-mongodb": "^4.2.0",
     "loopback-context": "^3.5.1",
     "nodemon": "^2.0.4",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
     "serve-favicon": "^2.0.1",
     "strong-error-handler": "^3.0.0",
     "winston": "^3.3.3"
