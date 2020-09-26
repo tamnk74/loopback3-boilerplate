@@ -32,14 +32,16 @@
   },
   "session": {},
   "auth": {
-    "./middlewares/auth": {}
+    "./middlewares/auth": {
+      "paths": [
+        "/api/me"
+      ]
+    }
   },
   "parse": {},
   "routes": {
     "loopback#rest": {
-      "paths": [
-        "${restApiRoot}"
-      ]
+      "paths": ["${restApiRoot}"]
     }
   },
   "files": {},
@@ -48,6 +50,11 @@
   },
   "final:after": {
     "./middlewares/handleError": {},
-    "strong-error-handler": {}
+    "strong-error-handler": {
+      "params": {
+        "debug": false,
+        "log": true
+      }
+    }
   }
 }

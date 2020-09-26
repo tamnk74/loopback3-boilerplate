@@ -1,7 +1,7 @@
 {
   "name": "user",
   "plural": "users",
-  "base": "User",
+  "base": "Model",
   "idInjection": true,
   "options": {
     "validateUpsert": true
@@ -9,13 +9,41 @@
   "remoting": {
     "normalizeHttpPath": true
   },
+  "mixins": {
+    "TimeStamp": true,
+    "CollectionIndexes": {
+      "indexes": [{
+          "key": {
+            "username": 1
+          },
+          "unique": true,
+          "collation": {
+            "locale": "en_US",
+            "strength": 2
+          }
+        },
+        {
+          "key": {
+            "email": 1
+          },
+          "unique": true,
+          "collation": {
+            "locale": "en_US",
+            "strength": 2
+          }
+        }
+      ]
+    }
+  },
   "http": {
     "path": "/"
   },
   "properties": {
     "username": {
       "type": "string",
-      "required": true
+      "required": true,
+      "index": true,
+      "unique": true
     },
     "email": {
       "type": "string",
@@ -27,8 +55,7 @@
   },
   "validations": [],
   "relations": {},
-  "acls": [
-    {
+  "acls": [{
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$unauthenticated",

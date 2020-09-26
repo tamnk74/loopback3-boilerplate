@@ -1,21 +1,17 @@
 import Jwt from '../../../utils/Jwt';
-import loginSchema from '../schemas/login';
+import registerSchema from '../schemas/register';
 
-export function loginRoute(User) {
-  User.Login = async function (req, res, next) {
+export function registerRoute(User) {
+  User.Register = async function (req, res, next) {
     try {
-      const { error } = loginSchema.validate(req.body);
+      const { error } = registerSchema.validate(req.body);
       if (error) {
         throw error;
       }
-      const user = await User.findOne({
-        where: {
-          email: req.body.email,
-        },
+      const user = await User.create({
+        ...req.body,
+        password: req.body.password,
       });
-      if (!user || !user.comparePassword(req.body.password)) {
-        return next(new Error('LOG-0001'));
-      }
 
       const token = Jwt.generateToken({
         user: {
@@ -34,12 +30,12 @@ export function loginRoute(User) {
     }
   };
 
-  User.remoteMethod('Login', {
+  User.remoteMethod('Register', {
     accepts: [
       { arg: 'req', type: 'object', http: { source: 'req' } },
       { arg: 'res', type: 'object', http: { source: 'res' } },
     ],
-    http: { path: '/login', verb: 'post' },
+    http: { path: '/register', verb: 'post' },
     returns: { arg: 'data', type: 'object', root: true },
   });
 }

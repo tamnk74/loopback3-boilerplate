@@ -9,27 +9,16 @@ const loopback = require('loopback');
 const boot = require('loopback-boot');
 const bodyParser = require('body-parser');
 const passport = require('passport');
-// const loopbackPassport = require('loopback-component-passport');
 
 const { jwtStrategy } = require('../configs/passport');
 const app = loopback();
-// const PassportConfigurator = loopbackPassport.PassportConfigurator;
-// const passportConfigurator = new PassportConfigurator(app);
 
 app.middleware('initial', bodyParser.urlencoded({ extended: true }));
-
-// passportConfigurator.init();
-// passportConfigurator.setupModels({
-//   userModel: app.models.user,
-//   userIdentityModel: app.models.userIdentity,
-//   userCredentialModel: app.models.userCredential,
-// });
 
 // Jsonwebtoken authentification
 app.use(passport.initialize());
 passport.use('jwt', jwtStrategy);
 
-// app.middleware('auth', loopback.token());
 app.start = function () {
   // start the web server
   return app.listen(function () {
@@ -49,8 +38,7 @@ boot(app, __dirname, function (err) {
   if (err) throw err;
 
   // start the server if `$ node server.js`
-  if (require.main === module)
-    app.start();
+  if (require.main === module) app.start();
 });
 
 app.get('remoting').errorHandler = {
@@ -60,13 +48,21 @@ app.get('remoting').errorHandler = {
     // send the error back to the original handler
     defaultHandler(err);
   },
-  disableStackTrace: true
+  disableStackTrace: true,
 };
 
 app.buildError = function (err) {
-  err.status = err.statusCode; // override the status
+  if (err.isJoi) {
+    return {
+      status: 422,
+      code: 'ERR-0422',
+      message: err.message,
+      stack: err.stack,
+      detail: err.detail,
+    };
+  }
 
-  // remove the statusCode property
+  err.status = err.statusCode;
   delete err.statusCode;
 
   return err;

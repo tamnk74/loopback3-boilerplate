@@ -7,7 +7,8 @@
     "mixins": [
       "loopback/common/mixins",
       "loopback/api/mixins",
-      "../common/mixins",
+      "../node_modules/loopback-ds-timestamp-mixin",
+      "../api/mixins",
       "./mixins"
     ]
   },

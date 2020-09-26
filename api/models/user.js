@@ -1,46 +1,19 @@
-import { loginRoute, meRoute } from '../modules/users/routes';
+import * as userRoutes from '../modules/users/routes';
 import bcryptjs from 'bcryptjs';
 
-const disableRemoteMethods = [
-  'count',
-  'create',
-  'createChangeStream',
-  'changePassword',
-  'confirm',
-  'deleteById',
-  'exists',
-  'find',
-  'findOne',
-  'findById',
-  'login',
-  'logout',
-  'prototype.updateAttributes',
-  'prototype.verify',
-  'prototype.__count__accessTokens',
-  'prototype.__create__accessTokens',
-  'prototype.__delete__accessTokens',
-  'prototype.__destroyById__accessTokens',
-  'prototype.__findById__accessTokens',
-  'prototype.__get__accessTokens',
-  'prototype.__updateById__accessTokens',
-  'replace',
-  'replaceOrCreate',
-  'replaceById',
-  'resetPassword',
-  'setPassword',
-  'update',
-  'updateAll',
-  'upsert',
-  'upsertWithWhere',
-  'verify',
-];
-
 export default function (User) {
+  const salt = bcryptjs.genSaltSync(10);
   User.prototype.comparePassword = function (password) {
     return bcryptjs.compareSync(password, this.password);
   };
-  disableRemoteMethods.forEach(method => User.disableRemoteMethodByName(method));
+  User.observe('before save', function (ctx, next) {
+    if (ctx.instance) {
+      ctx.instance.password = bcryptjs.hashSync(ctx.instance.password, salt);
+    } else {
+      ctx.data.password = bcryptjs.hashSync(ctx.data.password, salt);
+    }
+    next();
+  });
 
-  loginRoute(User);
-  meRoute(User);
-};
+  Object.keys(userRoutes).forEach((route) => userRoutes[route](User));
+}

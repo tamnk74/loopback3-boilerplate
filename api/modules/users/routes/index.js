@@ -1,2 +1,3 @@
-export loginRoute from './login';
-export meRoute from './me';
+export * from './login';
+export * from './me';
+export * from './register';
