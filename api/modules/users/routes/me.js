@@ -1,18 +1,11 @@
 export function meRoute(User) {
-  User.me = async function (req, res, next) {
-    try {
-      const { user } = req;
-      return next(null, { user });
-    } catch (error) {
-      return next(error);
-    }
+  User.me = async function (req) {
+    const { user } = req;
+    return { user };
   };
 
   User.remoteMethod('me', {
-    accepts: [
-      { arg: 'req', type: 'object', http: { source: 'req' } },
-      { arg: 'res', type: 'object', http: { source: 'res' } },
-    ],
+    accepts: [{ arg: 'req', type: 'object', http: { source: 'req' } }],
     http: { path: '/me', verb: 'get' },
     returns: { arg: 'data', type: 'object' },
   });
